@@ -1,0 +1,28 @@
+spring:
+ cloud:
+   gateway:
+     routes:
+       - id: sundi-app
+         uri: lb://sundi-app
+         predicates:
+           - Path=/swiggy/**
+       - id: myservice
+         uri: lb://myservice
+         predicates:
+           - Path=/restaurant/**
+        
+
+
+ application:
+   name: api-gateway
+
+ security:
+   oauth2:
+     resourceserver:
+       jwt:
+         issuer-uri: http://localhost:8181/realms/sundifafa
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
